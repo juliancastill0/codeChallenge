@@ -1,0 +1,19 @@
+.form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+
+input{
+    font-size: 20px;
+}
+
+#enviar:hover{
+    box-shadow: 0 0 10px 1px blue;
+}
+
+.campos:hover{
+    outline: 1px solid blue;
+}
