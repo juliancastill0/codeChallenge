@@ -1,37 +1,83 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="main.js"></script>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css" />
     <title>Breakout</title>
-</head>
-<body>
+  </head>
+  <body>
+    <div class="container">
 
-    <div class="form">
-        <input type="text" id="nombre" placeholder="Nombre..." class="campos">
-        <input type="text" id="apellido" placeholder="Apellido..." class="campos">
-        <input type="number" id="grupo" placeholder="Grupo..." class="campos">
-        <input type="number" id="sala" placeholder="Sala..." class="campos">
-        <input type="submit" id="enviar">
-    </div>
-    <button id="mostrarTodo">Mostrar toda la lista</button>
-    <button id="borraTodo">Borrar toda la lista</button>
-    <div class="tabla">
-        <table>
+      <div class="row col-12">
+        <h1>ÚNETE A NOSOTROS</h1>
+      </div>
+
+      <div class="row">
+        <div class="form col-12">
+          <input
+            type="text"
+            id="nombre"
+            placeholder="Nombre..."
+            class="campos"
+          />
+          <input
+            type="text"
+            id="apellido"
+            placeholder="Apellido..."
+            class="campos"
+          />
+          <input
+            type="number"
+            id="grupo"
+            placeholder="Grupo..."
+            class="campos"
+          />
+          <input type="number" id="sala" placeholder="Sala..." class="campos" />
+          <input type="submit" id="enviar" />
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="tabla col-12">
+          <table>
             <thead>
-                <tr>
-                    <th>Nombre</th>
-                    <th>Apellido</th>
-                    <th>Grupo</th>
-                    <th>Sala</th>
-                    <th>Eliminar</th>
-                </tr>
+              <tr>
+                <th>NOMBRE</th>
+                <th>APELLIDO</th>
+                <th>GRUPO</th>
+                <th>SALA</th>
+                <th></th>
+              </tr>
             </thead>
-            <tbody id="cuerpoTabla">
-            </tbody>
-        </table>
+            <tbody id="cuerpoTabla"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-6">
+          <button id="mostrarTodo">Mostrar lista completa</button>
+        </div>
+        <div class="col-6">
+          <button id="borraTodo">Eliminar lista</button>
+        </div>
+      </div>
+
+      <div id="custom-confirm" class="custom-modal col-12">
+        <div class="custom-modal-content">
+            <p>¿Estás seguro de que deseas eliminar todos los elementos?</p>
+            <button id="confirm-yes">Sí</button>
+            <button id="confirm-no">No</button>
+        </div>
     </div>
-</body>
+
+      <div class="row">
+        <footer class="col-12">
+          <p>Copyright @belenarias&jualiancastillo</p>
+        </footer>
+      </div>
+    </div>
+  </body>
 </html>
