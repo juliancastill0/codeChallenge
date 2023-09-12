@@ -50,8 +50,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 tr.innerHTML = `<td>${element.nombre}</td><td>${element.apellido}</td><td>${element.grupo}</td><td>${element.sala}</td>`;
                 boton.innerHTML = "🗑️";
                 boton.addEventListener("click", () => {
-                    fetch(url + "/" + element._id, {method: 'DELETE'})
-                    tr.remove();
+                    borrarElemento(element._id, tr);
                 })
 
                 tr.appendChild(boton);
@@ -71,13 +70,17 @@ document.addEventListener("DOMContentLoaded", () => {
             tr.innerHTML = `<td>${element.nombre}</td><td>${element.apellido}</td><td>${element.grupo}</td><td>${element.sala}</td>`;
             button.innerHTML = "🗑️";
             button.addEventListener("click", () => {
-                fetch(url + "/" + element._id, {method: 'DELETE'})
-                tr.remove();
+                borrarElemento(element._id, tr);
             });
 
             tr.appendChild(button);
             tabla.appendChild(tr);
 
         })
+    };
+
+    function borrarElemento(id, tr){
+        fetch(url + "/" + id, {method: 'DELETE'});
+        tr.remove();
     };
 });
