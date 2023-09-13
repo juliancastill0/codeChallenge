@@ -140,7 +140,7 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
  /* BOTONES ---------------------------------------------------*/
-#mostrarTodo, #borraTodo{
+#mostrarLista, #borraTodo{
     display: inline-block;
     font-size: 15px;
     font-family: 'Montserrat', sans-serif;
@@ -155,7 +155,7 @@ input[type="number"]::-webkit-outer-spin-button {
     cursor: pointer;
 }
 
-#mostrarTodo{
+#mostrarLista{
     float: left;
     background-color: #0000006a;
 }
@@ -165,12 +165,12 @@ input[type="number"]::-webkit-outer-spin-button {
     background-color: #000000;
  }
 
-#mostrarTodo:hover, #borraTodo:hover{ /* Efecto con hover */
+#mostrarLista:hover, #borraTodo:hover{ /* Efecto con hover */
     box-shadow: 0 0 5px 1px #00000028;
     transform: scale(1.009);
 }
 
-#mostrarTodo:active, #borraTodo:active { /* Efecto con click */
+#mostrarLista:active, #borraTodo:active { /* Efecto con click */
     animation: rebote 1s ease-in-out;
 }
 
@@ -199,23 +199,23 @@ th, td { /* todos los elementos */
 }
 
  /* Boton basura */
-tr button{
+img{
+    width: 2.5em;
     font-size: 15px;
     color: #ffffff99;
-    background-color: #151515;
-    border-radius: 8px;
-    padding: 5px 10px;
-    margin-top: 7px;
+    background-color: #000000;
+    margin: -13px;
+    border: 0;
     cursor: pointer;
     transition: transform 0.2s ease-in-out;
 }
 
-tr button:hover{ /* Efecto con hover */
+img:hover{ /* Efecto con hover */
     color: white;
     transform: scale(1.05);
 }
 
-tr button:active { /* Efecto con click */
+img:active { /* Efecto con click */
     animation: rebote 1s ease-in-out;
     color: white;
 }

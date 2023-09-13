@@ -2,8 +2,13 @@ document.addEventListener("DOMContentLoaded", () => {
     const url = "https://crudcrud.com/api/adc54d7744e946cd8ffc1851accabb6d/prueba000";
     const enviar = document.getElementById("enviar");
     const borraTodo = document.getElementById("borraTodo");
-    const mostrarTodo = document.getElementById("mostrarTodo");
+    const mostrarLista = document.getElementById("mostrarLista");
     let tabla = document.getElementById("cuerpoTabla");
+
+    async function fetchData(url){ // Acorta codigo del fetch y su response
+        const response = await fetch(url);
+        return await response.json();
+    };
 
     enviar.addEventListener("click", () => {
         let persona = {
@@ -14,8 +19,8 @@ document.addEventListener("DOMContentLoaded", () => {
         };
 
         let options = {
-            headers: {"Content-Type": "application/json; charset=utf-8"}, 
-            method: "POST", 
+            headers: {"Content-Type": "application/json; charset=utf-8"},
+            method: 'POST',
             body: JSON.stringify(persona)
         };
 
@@ -23,87 +28,68 @@ document.addEventListener("DOMContentLoaded", () => {
         .then(response => response.json())
         .then(data => {
             Array.from(document.getElementsByClassName("campos")).forEach(element => {element.value = "";});
-            agregarALista();
+            MostrarElemento(data);
         })
     });
 
-    // PARA PONERLE ESTILO A LA ALERTA DE CONFIRMACION
-    const customConfirm = document.getElementById("custom-confirm");
-    const confirmYes = document.getElementById("confirm-yes");
-    const confirmNo = document.getElementById("confirm-no");
-    
-    borraTodo.addEventListener("click", () => {
-        // Mostrar la ventana de confirmación
-        customConfirm.style.display = "block";
-    });
-    
-    confirmYes.addEventListener("click", () => {
-        // Ejecutar la eliminación si se confirma
-        fetch(url)
-        .then(response => response.json())
-        .then(data => {
-            data.forEach(element => {
-                fetch(url + '/' + element._id, {method:'DELETE'});
-            });
-            tabla.innerHTML = "";
-        });
-    
-        // Ocultar la ventana de confirmación después de la eliminación
-        customConfirm.style.display = "none";
-    });
-    
-    confirmNo.addEventListener("click", () => {
-        // Ocultar la ventana de confirmación si se cancela
-        customConfirm.style.display = "none";
-    });
-    //  TERMINA EL PONERLE ESTILO A LA ALERTA DE CONFIRMACION
-    
-    
-
-    mostrarTodo.addEventListener("click", () => {
-        fetch(url)
-        .then(response => response.json())
+    mostrarLista.addEventListener("click", () => {
+        fetchData(url)
         .then(data => {
             tabla.innerHTML = "";
             data.forEach(element => {   
-                let tr = document.createElement("tr");
-                let boton = document.createElement("button");
-
-                tr.innerHTML = `<td>${element.nombre}</td><td>${element.apellido}</td><td>${element.grupo}</td><td>${element.sala}</td>`;
-                boton.innerHTML = "✕";
-                boton.addEventListener("click", () => {
-                    borrarElemento(element._id, tr);
-                })
-
-                tr.appendChild(boton);
-                tabla.appendChild(tr);
+                MostrarElemento(element);
             });
         })
     });
 
-    function agregarALista(){
-        fetch(url)
-        .then(response => response.json())
-        .then(data => {
-            let element = data[data.length - 1];
-            let tr = document.createElement("tr");
-            let button = document.createElement("button");
+    function MostrarElemento(element){
+        let tr = document.createElement("tr");
+        let button = document.createElement("button");
+        let img = document.createElement("img");
 
-            tr.innerHTML = `<td>${element.nombre}</td><td>${element.apellido}</td><td>${element.grupo}</td><td>${element.sala}</td>`;
-            button.innerHTML = "✕";
-            button.addEventListener("click", () => {
-                borrarElemento(element._id, tr);
-            });
+        tr.innerHTML = `<td>${element.nombre}</td><td>${element.apellido}</td><td>${element.grupo}</td><td>${element.sala}</td>`;
 
-            tr.appendChild(button);
-            tabla.appendChild(tr);
+        img.src = "basura.png";
+        img.addEventListener("click", () => {
+            eliminarElemento(element._id, tr);
+            tr.remove();
+        });
 
-        })
-    };
+        button.appendChild(img);
+        tr.appendChild(button);
+        tabla.appendChild(tr); 
+    }
 
-    function borrarElemento(id, tr){
+
+    function eliminarElemento(id){
         fetch(url + "/" + id, {method: 'DELETE'});
-        tr.remove();
     };
+
+
+    // ALERTA DE CONFIRMACION PARA ELIMINAR TODA LA LISTA
+    const customConfirm = document.getElementById("custom-confirm");
+    const confirmYes = document.getElementById("confirm-yes");
+    const confirmNo = document.getElementById("confirm-no");
+
+    borraTodo.addEventListener("click", () => { 
+        customConfirm.style.display = "block"; // Mostrar la ventana de confirmación
+    });
+
+    confirmYes.addEventListener("click", () => { // Ejecutar la eliminación si se confirma
+        fetchData(url)
+        .then(data => {
+            data.forEach(element => {
+                eliminarElemento(element._id);
+            });
+            tabla.innerHTML = "";
+        });
+
+        customConfirm.style.display = "none"; // Ocultar la ventana de confirmación después de la eliminación
+    });
+
+    confirmNo.addEventListener("click", () => { 
+        customConfirm.style.display = "none"; // Ocultar la ventana de confirmación si se cancela
+    });
+
 });
 
