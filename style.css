@@ -1,11 +1,71 @@
-body{
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    gap: 50px;
-    background-color: khaki;
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400;600;900&display=swap');
+
+* {box-sizing: border-box;}
+
+.row {
+    width: 100%; /* Ocupa todo el ancho disponible */
+    max-width: 100%; /* No excede el ancho disponible */
+    margin: 20px 0; /* Espacio entre filas */
 }
 
+.row::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+  
+/* Para dispositivos móviles */
+[class*="col-"] {
+    width: 100%;
+}
+  
+/* Para pantallas de escritorio */
+@media only screen and (min-width: 768px) {
+    [class*="col-"] {
+      float: left;
+    }
+    .col-1 {width: 8.33%;}
+    .col-2 {width: 16.66%;}
+    .col-3 {width: 25%;}
+    .col-4 {width: 33.33%;}
+    .col-5 {width: 41.66%;}
+    .col-6 {width: 50%;}
+    .col-7 {width: 58.33%;}
+    .col-8 {width: 66.66%;}
+    .col-9 {width: 75%;}
+    .col-10 {width: 83.33%;}
+    .col-11 {width: 91.66%;}
+    .col-12 {width: 100%;}
+}
+
+
+body{
+    margin: 0 10%;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    background-color: #f0e264;
+    font-family: 'Montserrat', sans-serif;
+}
+
+h1{
+    font-weight: 900;
+    margin: 1.3em 0 0.5em 0;
+    text-align: center;
+    font-size: 3em;
+    padding-bottom: 0.5em;
+    border-bottom: 2px solid #000000;
+}
+
+h2{
+    font-size: 18px;
+    font-weight: 600;
+    color: #000000;
+    margin: -8px 27px;
+}
+
+
+ /* FORM ----------------------------*/
 .form{
     display: flex;
     flex-direction: column;
@@ -14,39 +74,189 @@ body{
     gap: 8px;
 }
 
-input{
-    font-size: 20px;
+
+ /* Campos */
+.campos{
+    font-size: 17px;
+    font-family: 'Montserrat', sans-serif;
+    width: 60%;
+    height: 2em;
+    padding: 5px 15px;
+    border-radius: 30px;
+    border: 0;
+    transition: transform 0.3s ease;
 }
 
-#enviar:hover{
-    box-shadow: 0 0 10px 1px blue;
+/* Estilo para los input de tipo number */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none; /* Elimina las flechas en navegadores WebKit (Chrome, Safari) */
+    appearance: none; /* Elimina las flechas en otros navegadores */
 }
+
 
 .campos:hover{
-    outline: 1px solid blue;
+    outline: 1px solid #fffed4;
 }
 
+
+ /* Boton Enviar */
+ #enviar {
+    font-size: 18px;
+    font-weight: 900;
+    color: #f0e68c;
+    background-color: #151515;
+    border: 0;
+    border-radius: 30px;
+    padding: 5px;
+    height: 50px;
+    width: 60%;
+    margin: 8px 0 25px 0;
+    transition: transform 0.4s ease-in-out;
+    cursor: pointer;
+}
+
+
+
+#enviar:hover{ /* Efecto con hover */
+    box-shadow: 0 0 10px 1px #0000003d;
+    transform: scale(1.009);
+}
+
+#enviar:active { /* Efecto con click */
+    animation: rebote 1s ease-in-out;
+}
+
+@keyframes rebote {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(0.95); 
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+ /* BOTONES ---------------------------------------------------*/
+#mostrarTodo, #borraTodo{
+    display: inline-block;
+    font-size: 15px;
+    font-family: 'Montserrat', sans-serif;
+    color: #ffffff;
+    width: auto;
+    padding: 0 20px;
+    height: 40px;
+    border-radius: 30px;
+    border: 0;
+    margin: 5px 0 50px 0;
+    transition: transform 0.4s ease-in-out;
+    cursor: pointer;
+}
+
+#mostrarTodo{
+    float: left;
+    background-color: #0000006a;
+}
+
+#borraTodo {
+    float: right;
+    background-color: #000000;
+ }
+
+#mostrarTodo:hover, #borraTodo:hover{ /* Efecto con hover */
+    box-shadow: 0 0 5px 1px #00000028;
+    transform: scale(1.009);
+}
+
+#mostrarTodo:active, #borraTodo:active { /* Efecto con click */
+    animation: rebote 1s ease-in-out;
+}
+
+
+ /* TABLA -----------------------------------------------------*/
 table{
-    padding: 10px;
-    width: 75vw;
-    font-family: cursive;
-    color: #151515;
-    background-color: #151515;
-    border-radius: 10px;
-    box-shadow: 10px 10px 20px 5px black;
-}
-
-tr{
-    background-color: aliceblue;
-}
-
-#cuerpoTabla{
     text-align: center;
+    color: white;
+    background-color: black;
+    box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.263);
+    width: 100%;
+    border-collapse: collapse;
+    border: 10px;
+    border-radius: 30px;
 }
 
+th{  /* Titulos de la lista */
+    font-size: 17px;
+    color: #f0e68c;
+    padding: 20px 0;
+}
+
+th, td { /* todos los elementos */
+    border-bottom: 1px solid #ffffff23;
+    height: 50px;
+}
+
+ /* Boton basura */
 tr button{
+    font-size: 15px;
+    color: #ffffff99;
     background-color: #151515;
-    font-size: 30px;
-    border: solid 1px darkgoldenrod;
-    border-radius: 10px;
+    border-radius: 8px;
+    padding: 5px 10px;
+    margin-top: 7px;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+}
+
+tr button:hover{ /* Efecto con hover */
+    color: white;
+    transform: scale(1.05);
+}
+
+tr button:active { /* Efecto con click */
+    animation: rebote 1s ease-in-out;
+    color: white;
+}
+
+
+/* Alerta de confirmación ----------------------------------*/
+.custom-modal { /* Fondo */
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 1;
+    justify-content: center;
+    align-items: center;
+}
+
+.custom-modal-content { /* Alerta */
+    background-color: white;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+button {
+    margin: 10px;
+    padding: 5px 10px;
+    border: none;
+    cursor: pointer;
+}
+
+
+ /* FOOTER ----------------------------*/
+ footer {
+    position: absolute;
+    left: 0; 
+    right: 0; 
+    text-align: center;
+    font-size: 10px;
+    font-weight: 200;
+    color: white;
+    background-color: #151515;
 }

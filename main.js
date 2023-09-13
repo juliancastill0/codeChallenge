@@ -27,16 +27,38 @@ document.addEventListener("DOMContentLoaded", () => {
         })
     });
 
+    // PARA PONERLE ESTILO A LA ALERTA DE CONFIRMACION
+    const customConfirm = document.getElementById("custom-confirm");
+    const confirmYes = document.getElementById("confirm-yes");
+    const confirmNo = document.getElementById("confirm-no");
+    
     borraTodo.addEventListener("click", () => {
+        // Mostrar la ventana de confirmación
+        customConfirm.style.display = "block";
+    });
+    
+    confirmYes.addEventListener("click", () => {
+        // Ejecutar la eliminación si se confirma
         fetch(url)
         .then(response => response.json())
-        .then (data => {
+        .then(data => {
             data.forEach(element => {
-                fetch(url + '/' + element._id, {method:'DELETE'})
+                fetch(url + '/' + element._id, {method:'DELETE'});
             });
             tabla.innerHTML = "";
-        })
+        });
+    
+        // Ocultar la ventana de confirmación después de la eliminación
+        customConfirm.style.display = "none";
     });
+    
+    confirmNo.addEventListener("click", () => {
+        // Ocultar la ventana de confirmación si se cancela
+        customConfirm.style.display = "none";
+    });
+    //  TERMINA EL PONERLE ESTILO A LA ALERTA DE CONFIRMACION
+    
+    
 
     mostrarTodo.addEventListener("click", () => {
         fetch(url)
@@ -48,7 +70,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 let boton = document.createElement("button");
 
                 tr.innerHTML = `<td>${element.nombre}</td><td>${element.apellido}</td><td>${element.grupo}</td><td>${element.sala}</td>`;
-                boton.innerHTML = "🗑️";
+                boton.innerHTML = "✕";
                 boton.addEventListener("click", () => {
                     borrarElemento(element._id, tr);
                 })
@@ -68,7 +90,7 @@ document.addEventListener("DOMContentLoaded", () => {
             let button = document.createElement("button");
 
             tr.innerHTML = `<td>${element.nombre}</td><td>${element.apellido}</td><td>${element.grupo}</td><td>${element.sala}</td>`;
-            button.innerHTML = "🗑️";
+            button.innerHTML = "✕";
             button.addEventListener("click", () => {
                 borrarElemento(element._id, tr);
             });
@@ -84,3 +106,4 @@ document.addEventListener("DOMContentLoaded", () => {
         tr.remove();
     };
 });
+
