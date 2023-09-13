@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
         .then(response => response.json())
         .then(data => {
             Array.from(document.getElementsByClassName("campos")).forEach(element => {element.value = "";});
-            MostrarElemento(data);
+            mostrarElemento(data);
         })
     });
 
