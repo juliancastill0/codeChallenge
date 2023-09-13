@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
         .then(response => response.json())
         .then(data => {
             Array.from(document.getElementsByClassName("campos")).forEach(element => {element.value = "";});
-            mostrarElemento(data);
+            agregarElemento(data);
         })
     });
 
@@ -39,7 +39,7 @@ document.addEventListener("DOMContentLoaded", () => {
             let contador = 0;
             let intervaloID = setInterval(() => {
                 if (contador < data.length){
-                    mostrarElemento(data[contador]);
+                    agregarElemento(data[contador]);
                     contador++;
                 }
                 else{
@@ -49,7 +49,7 @@ document.addEventListener("DOMContentLoaded", () => {
         })
     });
 
-    function mostrarElemento(element){
+    function agregarElemento(element){
         let tr = document.createElement("tr");
         let button = document.createElement("button");
         let img = document.createElement("img");
