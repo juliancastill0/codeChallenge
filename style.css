@@ -203,9 +203,8 @@ img{
     width: 2.5em;
     font-size: 15px;
     color: #ffffff99;
-    background-color: #151515;
+    background-color: #000000;
     margin: -13px;
-    border-radius: 8px;
     border: 0;
     cursor: pointer;
     transition: transform 0.2s ease-in-out;
