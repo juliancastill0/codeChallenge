@@ -36,13 +36,20 @@ document.addEventListener("DOMContentLoaded", () => {
         fetchData(url)
         .then(data => {
             tabla.innerHTML = "";
-            data.forEach(element => {   
-                MostrarElemento(element);
-            });
+            let contador = 0;
+            let intervaloID = setInterval(() => {
+                if (contador < data.length){
+                    mostrarElemento(data[contador]);
+                    contador++;
+                }
+                else{
+                    clearInterval(intervaloID);
+                };
+            }, 1500);
         })
     });
 
-    function MostrarElemento(element){
+    function mostrarElemento(element){
         let tr = document.createElement("tr");
         let button = document.createElement("button");
         let img = document.createElement("img");
