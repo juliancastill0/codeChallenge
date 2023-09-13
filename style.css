@@ -44,17 +44,24 @@ body{
     padding: 0;
     display: flex;
     flex-direction: column;
-    background-color: #f0e68c;
+    background-color: #f0e264;
     font-family: 'Montserrat', sans-serif;
 }
 
 h1{
     font-weight: 900;
-    margin: 1em 0 0.4em 0;
+    margin: 1.3em 0 0.5em 0;
     text-align: center;
     font-size: 3em;
-    padding-bottom: 0.4em;
+    padding-bottom: 0.5em;
     border-bottom: 2px solid #000000;
+}
+
+h2{
+    font-size: 18px;
+    font-weight: 600;
+    color: #000000;
+    margin: -8px 27px;
 }
 
 
@@ -104,7 +111,7 @@ input[type="number"]::-webkit-outer-spin-button {
     padding: 5px;
     height: 50px;
     width: 60%;
-    margin-top: 8px;
+    margin: 8px 0 25px 0;
     transition: transform 0.4s ease-in-out;
     cursor: pointer;
 }
@@ -132,7 +139,7 @@ input[type="number"]::-webkit-outer-spin-button {
     }
 }
 
- /* BOTONES ----------------------------*/
+ /* BOTONES ---------------------------------------------------*/
 #mostrarTodo, #borraTodo{
     display: inline-block;
     font-size: 15px;
@@ -143,7 +150,7 @@ input[type="number"]::-webkit-outer-spin-button {
     height: 40px;
     border-radius: 30px;
     border: 0;
-    margin: 0 0 25px 0;
+    margin: 5px 0 50px 0;
     transition: transform 0.4s ease-in-out;
     cursor: pointer;
 }
@@ -167,6 +174,7 @@ input[type="number"]::-webkit-outer-spin-button {
     animation: rebote 1s ease-in-out;
 }
 
+
  /* TABLA -----------------------------------------------------*/
 table{
     text-align: center;
@@ -177,7 +185,6 @@ table{
     border-collapse: collapse;
     border: 10px;
     border-radius: 30px;
-    margin-top: 40px;
 }
 
 th{  /* Titulos de la lista */
@@ -244,7 +251,7 @@ button {
 
  /* FOOTER ----------------------------*/
  footer {
-    position: fixed;
+    position:absolute;
     bottom: 0;
     left: 0; 
     right: 0; 
