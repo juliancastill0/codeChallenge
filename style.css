@@ -101,7 +101,7 @@ input[type="number"]::-webkit-outer-spin-button {
 
 
  /* Boton Enviar */
- #enviar {
+ #enviar, #editar {
     font-size: 18px;
     font-weight: 900;
     color: #f0e68c;
@@ -116,14 +116,16 @@ input[type="number"]::-webkit-outer-spin-button {
     cursor: pointer;
 }
 
+.hidden{
+    display: none;
+}
 
-
-#enviar:hover{ /* Efecto con hover */
+#enviar:hover, #editar:hover{ /* Efecto con hover */
     box-shadow: 0 0 10px 1px #0000003d;
     transform: scale(1.009);
 }
 
-#enviar:active { /* Efecto con click */
+#enviar:active, #editar:active { /* Efecto con click */
     animation: rebote 1s ease-in-out;
 }
 

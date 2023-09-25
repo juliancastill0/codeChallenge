@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
     const url = "https://crudcrud.com/api/adc54d7744e946cd8ffc1851accabb6d/prueba000";
     const enviar = document.getElementById("enviar");
+    const editar = document.getElementById("editar");
     const borraTodo = document.getElementById("borraTodo");
     const mostrarLista = document.getElementById("mostrarLista");
     let tabla = document.getElementById("cuerpoTabla");
@@ -33,6 +34,10 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     mostrarLista.addEventListener("click", () => {
+        mostrarTodaLaLista(0);
+    });
+
+    function mostrarTodaLaLista(tiempo){
         fetchData(url)
         .then(data => {
             tabla.innerHTML = "";
@@ -45,9 +50,36 @@ document.addEventListener("DOMContentLoaded", () => {
                 else{
                     clearInterval(intervaloID);
                 };
-            }, 0); // 1500
-        })
-    });
+            }, tiempo);
+        });
+    };
+
+    function editarin(id){
+        let nombre = document.getElementById("nombre").value;
+        let apellido = document.getElementById("apellido").value;
+        let grupo = document.getElementById("grupo").value;
+        let sala =  document.getElementById("sala").value;
+        
+        let options = {
+            headers: {"Content-Type": "application/json; charset=utf-8"},
+            method: 'put',
+            body: JSON.stringify({
+                nombre: nombre,
+                apellido: apellido,
+                grupo: grupo,
+                sala: sala
+            })
+        };
+
+        fetch(url + "/" + id, options)
+
+        document.getElementById("nombre").value = "";
+        document.getElementById("apellido").value = "";
+        document.getElementById("grupo").value = "";
+        document.getElementById("sala").value = "";
+        document.getElementById("editar").classList.add("hidden");
+        document.getElementById("enviar").classList.remove("hidden");
+    };
 
     function agregarElemento(element){
         let tr = document.createElement("tr");
@@ -72,37 +104,12 @@ document.addEventListener("DOMContentLoaded", () => {
         tr.appendChild(buttonEdit);
         tr.appendChild(buttonDelete);
         tabla.appendChild(tr); 
-    }
+    };
 
 
     function eliminarElemento(id){
         fetch(url + "/" + id, {method: 'DELETE'});
     };
-
-    // function editarElemento(id){
-    //     let options = {
-    //         headers: {"Content-Type": "application/json; charset=utf-8"},
-    //         method: 'PUT',
-    //         body: JSON.stringify({
-    //             nombre: "nombre",
-    //             apellido: "apellido",
-    //             grupo: "grupo",
-    //             sala: "sala"
-    //         })
-    //     };
-
-    //     fetchData(url)
-    //     .then(data => {
-    //         console.log(data)
-    //         let nombre = document.getElementById("nombre");
-    //         let apellido = document.getElementById("apellido");
-    //         let grupo = document.getElementById("grupo");
-    //         let sala = document.getElementById("sala");
-            
-    //         fetch(url + "/" + id, options)
-    //     })
-        
-    // };
 
     function editarElemento(id){
         fetchData(url + "/" + id)
@@ -112,7 +119,17 @@ document.addEventListener("DOMContentLoaded", () => {
             document.getElementById("grupo").value = data.grupo;
             document.getElementById("sala").value = data.sala;
         })
-    }
+
+        setTimeout(() => {
+            document.getElementById("editar").classList.remove("hidden");
+            document.getElementById("enviar").classList.add("hidden");
+        }, 300);
+
+        editar.addEventListener("click", () => { 
+            editarin(id);
+            setTimeout(mostrarTodaLaLista, 500, 0);
+        });
+    };
 
 
     // ALERTA DE CONFIRMACION PARA ELIMINAR TODA LA LISTA
@@ -139,6 +156,55 @@ document.addEventListener("DOMContentLoaded", () => {
     confirmNo.addEventListener("click", () => { 
         customConfirm.style.display = "none"; // Ocultar la ventana de confirmación si se cancela
     });
+
+    // function cambiarBoton(id){
+    //     if (document.getElementById("enviar").value == "Agregar"){
+    //         let persona = {
+    //             nombre: document.getElementById("nombre").value,
+    //             apellido: document.getElementById("apellido").value, 
+    //             grupo: document.getElementById("grupo").value, 
+    //             sala: document.getElementById("sala").value
+    //         };
+    
+    //         let options = {
+    //             headers: {"Content-Type": "application/json; charset=utf-8"},
+    //             method: 'POST',
+    //             body: JSON.stringify(persona)
+    //         };
+    
+    //         fetch(url, options)
+    //         .then(response => response.json())
+    //         .then(data => {
+    //             Array.from(document.getElementsByClassName("campos")).forEach(element => {element.value = "";});
+    //             agregarElemento(data);
+    //         })
+    //     } 
+    //     else if (document.getElementById("enviar").value == "Editar"){
+    //         let nombre = document.getElementById("nombre").value;
+    //         let apellido = document.getElementById("apellido").value;
+    //         let grupo = document.getElementById("grupo").value;
+    //         let sala =  document.getElementById("sala").value;
+            
+    //         let options = {
+    //             headers: {"Content-Type": "application/json; charset=utf-8"},
+    //             method: 'put',
+    //             body: JSON.stringify({
+    //                 nombre: nombre,
+    //                 apellido: apellido,
+    //                 grupo: grupo,
+    //                 sala: sala
+    //             })
+    //         };
+    
+    //         fetch(url + "/" + id, options)
+
+    //         document.getElementById("nombre").value = "";
+    //         document.getElementById("apellido").value = "";
+    //         document.getElementById("grupo").value = "";
+    //         document.getElementById("sala").value = "";
+    //         document.getElementById("enviar").value = "Agregar";
+    //     };
+    // };
 
 });
 
