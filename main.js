@@ -45,25 +45,32 @@ document.addEventListener("DOMContentLoaded", () => {
                 else{
                     clearInterval(intervaloID);
                 };
-            }, 1500);
+            }, 0); // 1500
         })
     });
 
     function agregarElemento(element){
         let tr = document.createElement("tr");
-        let button = document.createElement("button");
+        let buttonDelete = document.createElement("button");
+        let buttonEdit = document.createElement("button");
         let img = document.createElement("img");
 
         tr.innerHTML = `<td>${element.nombre}</td><td>${element.apellido}</td><td>${element.grupo}</td><td>${element.sala}</td>`;
 
         img.src = "basura.png";
-        img.addEventListener("click", () => {
+        buttonDelete.addEventListener("click", () => {
             eliminarElemento(element._id, tr);
             tr.remove();
         });
 
-        button.appendChild(img);
-        tr.appendChild(button);
+        buttonEdit.addEventListener("click", () => {
+            editarElemento(element._id);
+        });
+
+        buttonEdit.innerHTML = "editar";
+        buttonDelete.appendChild(img);
+        tr.appendChild(buttonEdit);
+        tr.appendChild(buttonDelete);
         tabla.appendChild(tr); 
     }
 
@@ -71,6 +78,41 @@ document.addEventListener("DOMContentLoaded", () => {
     function eliminarElemento(id){
         fetch(url + "/" + id, {method: 'DELETE'});
     };
+
+    // function editarElemento(id){
+    //     let options = {
+    //         headers: {"Content-Type": "application/json; charset=utf-8"},
+    //         method: 'PUT',
+    //         body: JSON.stringify({
+    //             nombre: "nombre",
+    //             apellido: "apellido",
+    //             grupo: "grupo",
+    //             sala: "sala"
+    //         })
+    //     };
+
+    //     fetchData(url)
+    //     .then(data => {
+    //         console.log(data)
+    //         let nombre = document.getElementById("nombre");
+    //         let apellido = document.getElementById("apellido");
+    //         let grupo = document.getElementById("grupo");
+    //         let sala = document.getElementById("sala");
+            
+    //         fetch(url + "/" + id, options)
+    //     })
+        
+    // };
+
+    function editarElemento(id){
+        fetchData(url + "/" + id)
+        .then(data => {
+            document.getElementById("nombre").value = data.nombre;
+            document.getElementById("apellido").value = data.apellido;
+            document.getElementById("grupo").value = data.grupo;
+            document.getElementById("sala").value = data.sala;
+        })
+    }
 
 
     // ALERTA DE CONFIRMACION PARA ELIMINAR TODA LA LISTA
