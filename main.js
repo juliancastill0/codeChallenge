@@ -43,23 +43,28 @@ document.addEventListener("DOMContentLoaded", () => {
         let tr = document.createElement("tr");
         let buttonDelete = document.createElement("button");
         let buttonEdit = document.createElement("button");
-        let img = document.createElement("img");
+        let imgBorrar = document.createElement("img");
+        let imgEditar = document.createElement("img");
 
         tr.innerHTML = `<td>${element.nombre}</td><td>${element.apellido}</td><td>${element.grupo}</td><td>${element.sala}</td>`;
 
-        img.src = "basura.png";
+        imgBorrar.src = "trash.png";
+        buttonDelete.style.backgroundColor = "#000000";
+        imgBorrar.style.width = "25px";
         buttonDelete.addEventListener("click", () => {
             eliminarElemento(element._id, tr);
             tr.remove();
         });
 
+        imgEditar.src = "lapiz1.png";
+        buttonEdit.style.backgroundColor = "#000000";
         buttonEdit.addEventListener("click", () => {
             mostrarElementoParaEditar(element._id);
             idAEditar = element._id;
         });
 
-        buttonEdit.innerHTML = "editar";
-        buttonDelete.appendChild(img);
+        buttonDelete.appendChild(imgBorrar);
+        buttonEdit.appendChild(imgEditar);
         tr.appendChild(buttonEdit);
         tr.appendChild(buttonDelete);
         tabla.appendChild(tr); 
@@ -69,7 +74,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // BOTON PARA MOSTRAR TODA LA LISTA //
     mostrarLista.addEventListener("click", () => {
-        mostrarTodaLaLista(0);
+        mostrarTodaLaLista(1500);
     });
 
     // FUNCTION QUE MUESTRA TODA LA LISTA //
